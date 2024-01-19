@@ -20,6 +20,8 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
       }
     });
 
+    
+
     res.json(response.data);
     console.log(response.data)
   } catch (error) {
@@ -43,9 +45,12 @@ ApiLocalCtrl.ventasBrutasl = async (req, res) => {
           'Content-Type': 'application/json'
         }
       });
+      response.data.forEach(element => {
+          console.log(element)
+      });
   
       res.json(response.data);
-      console.log(response.data)
+      console.log('Esto viene: ', response.data)
     } catch (error) {
       console.error('Error al consumir la API:', error);
       res.status(500).json({ error: 'Error al consumir la API' });
