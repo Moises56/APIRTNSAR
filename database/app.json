@@ -1,0 +1,149 @@
+[
+  { "SectorID": "65610bbd8e5872613d0e9176", 
+    "SubSectorNombre": "Cultivos", 
+    "SectorSubSectorTipo": "A" },
+  {
+    "SectorID": "65610bbd8e5872613d0e9176",
+    "SubSectorNombre": "Beneficiado",
+    "SectorSubSectorTipo": "B"
+  },
+  { "SectorID": "65610bbd8e5872613d0e9176", "SubSectorNombre": "Zootecnia", "SectorSubSectorTipo": "C" },
+  {
+    "SectorID": "65610bbd8e5872613d0e9176",
+    "SubSectorNombre": "Acuicultura",
+    "SectorSubSectorTipo": "D"
+  },
+  { "SectorID": "65610bbd8e5872613d0e9176", "SubSectorNombre": "Avícola", "SectorSubSectorTipo": "E" },
+  {
+    "SectorID": "65610bbd8e5872613d0e9177",
+    "SubSectorNombre": "Producción de Plántulas",
+    "SectorSubSectorTipo": "A"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9177",
+    "SubSectorNombre": "Industria Maderera",
+    "SectorSubSectorTipo": "B"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9177",
+    "SubSectorNombre": "Producción de carbón",
+    "SectorSubSectorTipo": "C"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9177",
+    "SubSectorNombre": "Fabricación de papel y productos de papel",
+    "SectorSubSectorTipo": "D"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9178",
+    "SubSectorNombre": "Hidrocarburos",
+    "SectorSubSectorTipo": "B"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Industria de alimentos y bebidas",
+    "SectorSubSectorTipo": "A"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Fabricación de productos textiles",
+    "SectorSubSectorTipo": "B"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Curtido y adobo de cueros",
+    "SectorSubSectorTipo": "C"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Industria Química",
+    "SectorSubSectorTipo": "D"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Fabricación de productos con materiales sintéticos",
+    "SectorSubSectorTipo": "E"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Fabricación de productos minerales no metálicos",
+    "SectorSubSectorTipo": "F"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Industria metálica",
+    "SectorSubSectorTipo": "G"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Industria Electrónica",
+    "SectorSubSectorTipo": "H"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Industria automotriz",
+    "SectorSubSectorTipo": "J"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e9179",
+    "SubSectorNombre": "Industria del reciclado",
+    "SectorSubSectorTipo": "K"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917a",
+    "SubSectorNombre": "Generación de Energía",
+    "SectorSubSectorTipo": "A"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917a",
+    "SubSectorNombre": "Transmisión de Energía",
+    "SectorSubSectorTipo": "B"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917a",
+    "SubSectorNombre": "Distribución de Energía Eléctrica",
+    "SectorSubSectorTipo": "C"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917a",
+    "SubSectorNombre": "MicroRedes de Energía Eléctrica",
+    "SectorSubSectorTipo": "D"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917b",
+    "SubSectorNombre": "Telecomunicaciones",
+    "SectorSubSectorTipo": "A"
+  },
+  { "SectorID": "65610bbd8e5872613d0e917c", "SubSectorNombre": "Servicios", "SectorSubSectorTipo": "A" },
+  { "SectorID": "65610bbd8e5872613d0e917c", "SubSectorNombre": "Talleres", "SectorSubSectorTipo": "B" },
+  {
+    "SectorID": "65610bbd8e5872613d0e917d",
+    "SubSectorNombre": "Infraestructura",
+    "SectorSubSectorTipo": "A"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917d",
+    "SubSectorNombre": "Construcción",
+    "SectorSubSectorTipo": "B"
+  },
+  { "SectorID": "65610bbd8e5872613d0e917d", "SubSectorNombre": "Vivienda", "SectorSubSectorTipo": "C" },
+  {
+    "SectorID": "65610bbd8e5872613d0e917d",
+    "SubSectorNombre": "Hospitalario",
+    "SectorSubSectorTipo": "D"
+  },
+  { "SectorID": "65610bbd8e5872613d0e917d", "SubSectorNombre": "Turismo", "SectorSubSectorTipo": "E" },
+  {
+    "SectorID": "65610bbd8e5872613d0e917e",
+    "SubSectorNombre": "Gestión de Residuos",
+    "SectorSubSectorTipo": "A"
+  },
+  {
+    "SectorID": "65610bbd8e5872613d0e917e",
+    "SubSectorNombre": "Gestión de Aguas Residuales",
+    "SectorSubSectorTipo": "B"
+  }
+]
+
+
+
