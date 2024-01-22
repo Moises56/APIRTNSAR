@@ -45,15 +45,39 @@ ApiLocalCtrl.ventasBrutasl = async (req, res) => {
           'Content-Type': 'application/json'
         }
       });
-      response.data.forEach(element => {
-          console.log(element)
-      });
   
-      res.json(response.data);
       console.log('Esto viene: ', response.data)
+      res.json(response.data);
+    
     } catch (error) {
-      console.error('Error al consumir la API:', error);
-      res.status(500).json({ error: 'Error al consumir la API' });
+      console.error('Error de RTN:', error);
+       // Prepara un objeto de error personalizado con la información específica
+       let customError = {
+        error: 'Error de RTN',
+        data: null,
+        isSuccess: false,
+        message: 'Error desconocido'
+      };
+
+      // Verifica si el error es una instancia de AxiosError
+      if (error instanceof axios.AxiosError) {
+        // Accede a las propiedades específicas del error de Axios
+        const axiosError = error;
+
+        // Accede a la respuesta (si está disponible)
+        const responseData = axiosError.response?.data;
+
+        if (responseData) {
+          customError = {
+            ...customError,
+            data: responseData.data,
+            isSuccess: responseData.isSuccess,
+            message: responseData.message
+          };
+        }
+      }
+
+      res.status(500).json(customError);
     }
   };
 
