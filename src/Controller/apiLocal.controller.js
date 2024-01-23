@@ -53,7 +53,7 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
     }
     console.log(customError);
 
-    res.status(500).json({error: customError});
+    res.status(500).json(customError);
   }
 };
 
@@ -73,6 +73,10 @@ ApiLocalCtrl.ventasBrutasl = async (req, res) => {
         headers: {
           //   'Authorization': `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
           "Content-Type": "application/json",
+          // agrefar ngrok-skip-browser-warning
+
+
+
         },
       }
     );
