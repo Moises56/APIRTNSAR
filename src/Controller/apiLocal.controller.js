@@ -59,9 +59,7 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
 
 // Consulta por Ventas Brutas
 ApiLocalCtrl.ventasBrutasl = async (req, res) => {
-  const apiUrl = "http://api.amdc.hn:3000/ventaBruta"; // Reemplaza con la URL de tu API
-  const username = "INT-AMDC-SW-API";
-  const password = "X&#rjw1Z5S&2";
+  const apiUrl = "http://api.amdc.hn:3000/ventaBruta"; 
   const { Rtn, PeriodoDesde, PeriodoHasta } = req.body;
 
   try {
@@ -71,20 +69,14 @@ ApiLocalCtrl.ventasBrutasl = async (req, res) => {
       { Rtn, PeriodoDesde, PeriodoHasta },
       {
         headers: {
-          //   'Authorization': `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
           "Content-Type": "application/json",
-          // agrefar ngrok-skip-browser-warning
-
-
-
         },
       }
     );
 
     console.log("Esto viene: ", response.data);
-    res.json(response.data);
+    res.status(200).json(response.data);
   } catch (error) {
-    // console.error('Error de RTN:', error);
     // Prepara un objeto de error personalizado con la información específica
     let customError = {
       data: null,
