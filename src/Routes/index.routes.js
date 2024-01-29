@@ -3,12 +3,13 @@ import { Router } from "express";
 const router = Router();
 
 import IndexCtrl from "../Controller/IndexPage.controller.js";
+import { verifyToken } from "../Middlewares/authJwt.js";
 
 // Routes
 // import indexRoutes from "./Routes/index.routes.js";
 
 // Ruta para guardar el registro con la subida de archivos
-router.get("/home", IndexCtrl.IndexPage);
+router.get("/home", verifyToken, IndexCtrl.IndexPage);
 
 
 
@@ -24,19 +25,19 @@ router.get("/contact", (req, res) => {
     res.json({ message: "contact." });
   });
 
-router.get("/sector", IndexCtrl.SectorGet);
-router.get("/subsector/:sectorID", IndexCtrl.SubSectorGet);
-router.get("/actividad/:subSectorID", IndexCtrl.ActividadGet);
-router.get("/act/:actividadID", IndexCtrl.ActividadGetId);
+router.get("/sector", verifyToken, IndexCtrl.SectorGet);
+router.get("/subsector/:sectorID", verifyToken, IndexCtrl.SubSectorGet);
+router.get("/actividad/:subSectorID",verifyToken, IndexCtrl.ActividadGet);
+router.get("/act/:actividadID", verifyToken, IndexCtrl.ActividadGetId);
 // guardar SaveSolicitud
-router.post("/save", IndexCtrl.SaveSolicitud);
-router.get("/solicitud", IndexCtrl.SolicitudGet);
-router.get("/solicitud/:idSol", IndexCtrl.SolicitudGetId);
-router.put("/solicaprovada/:idSol", IndexCtrl.SolicitudAprovada);
+router.post("/save", verifyToken, IndexCtrl.SaveSolicitud);
+router.get("/solicitud", verifyToken, IndexCtrl.SolicitudGet);
+router.get("/solicitud/:idSol", verifyToken, IndexCtrl.SolicitudGetId);
+router.put("/solicaprovada/:idSol", verifyToken, IndexCtrl.SolicitudAprovada);
 
 
 // /send email
-router.post("/sendemail/:email/send", IndexCtrl.sendEmail);
+router.post("/sendemail/:email/send", verifyToken, IndexCtrl.sendEmail);
 
 
 export default router;
