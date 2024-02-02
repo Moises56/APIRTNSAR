@@ -12,6 +12,7 @@ export const signupHandler = async (req, res) => {
       username,
       email,
       password,
+      roles
     });
 
     // checking for roles
@@ -44,7 +45,7 @@ export const signinHandler = async (req, res) => {
       "roles"
     );
 
-    if (!userFound) return res.status(400).json({ message: "User Not Found" });
+    if (!userFound) return res.json({ message: "Usuario No Encontrado" });
 
     const matchPassword = await User.comparePassword(
       req.body.password,
@@ -52,17 +53,26 @@ export const signinHandler = async (req, res) => {
     );
 
     if (!matchPassword)
-      return res.status(401).json({
+      return res.json({
         token: null,
-        message: "Invalid Password",
+        message: "Contraseña Incorrecta",
       });
 
     const token = jwt.sign({ id: userFound._id }, SECRET, {
       expiresIn: 86400, // 24 hours
     });
 
-    res.json({ token });
+    // res.json({ token });
+    res.send({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+      roles: userFound.roles.map((role) => "ROLE_" + role.name.toUpperCase()),
+      accessToken: token,
+    });
+
   } catch (error) {
+    res.status(500).send(error.message);
     console.log(error);
   }
 };

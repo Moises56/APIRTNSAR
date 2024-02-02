@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = Router();
 
 import ApiLocalCtrl from '../Controller/apiLocal.controller.js';
-import { verifyToken } from "../Middlewares/authJwt.js";
+import { verifyToken  } from "../Middlewares/authJwt.js";
 
 
 router.post('/apirtnl', verifyToken, ApiLocalCtrl.consultaRTNl);

@@ -25,8 +25,14 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
       }
     );
 
-    res.json(response.data);
-    console.log(response.data);
+    if (response.data.isSuccess === true) {
+      res.json(response.data);
+      console.log(response.data);
+    } else {
+      res.json(response.data);
+      console.log(response.data);
+    }
+
   } catch (error) {
     // Prepara un objeto de error personalizado con la información específica
     let customError = {
