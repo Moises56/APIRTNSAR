@@ -6,14 +6,14 @@ import { response } from "express";
 
 //Consulta por RTN
 ApiLocalCtrl.consultaRTNl = async (req, res) => {
-  const apiUrl = "https://api.amdc.hn:9091/apirtn";
+  const apiUrl = "https://api.amdc.hn:9091/api/apirtn";
   const username = "INT-AMDC-SW-API";
   const password = "X&#rjw1Z5S&2";
   const { rtn } = req.body;
   console
 
   try {
-    console.log("RTN: ", rtn);
+    console.log("rtn: ", rtn);
     const response = await axios.post(
       apiUrl,
       { rtn },
@@ -21,6 +21,9 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
         headers: {
           // 'Authorization': `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
           "Content-Type": "application/json",
+          // poner en el header el x-access-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjZjY2VjZDZjNjFjNGY0NTNjMjJjYyIsImlhdCI6MTcwNjgzNDkyMSwiZXhwIjoxNzA2OTIxMzIxfQ.FvRgeX-v6OJqJx-CXE1MDLrEDjkvSPoSKtNQgH1dQHo
+
+          "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjZjY2VjZDZjNjFjNGY0NTNjMjJjYyIsImlhdCI6MTcwNjgzNDkyMSwiZXhwIjoxNzA2OTIxMzIxfQ.FvRgeX-v6OJqJx-CXE1MDLrEDjkvSPoSKtNQgH1dQHo"
         },
       }
     );
@@ -66,7 +69,7 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
 
 // Consulta por Ventas Brutas
 ApiLocalCtrl.ventasBrutasl = async (req, res) => {
-  const apiUrl = "https://api.amdc.hn:9091/ventaBruta"; 
+  const apiUrl = "https://api.amdc.hn:9091/api/ventaBruta"; 
   const { Rtn, PeriodoDesde, PeriodoHasta } = req.body;
 
   try {
