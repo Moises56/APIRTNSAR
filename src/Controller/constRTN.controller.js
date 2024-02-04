@@ -1,5 +1,6 @@
 // controllers/apiController.js
 const ApiCtrl = {};
+import sumaVentas from "../Model/SumaVVB.js";
 
 import axios from "axios";
 import { response } from "express";
@@ -115,5 +116,29 @@ ApiCtrl.ventasBrutas = async (req, res) => {
     res.status(500).json(customError);
   }
 };
+
+// guarda el total de ventas brutas 
+// {id: 1, RTN: rtn, nombreEmpresa: empresa sumaAMDC: amdc, sumaSar: sar, anio: "2019", usuario: "admin"}
+ApiCtrl.saveVentasBrutas = async (req, res) => {
+  const { RTN, nombreEmpresa, sumaAMDC, sumaSar, anio, usuario } = req.body;
+  const newSumaVenta = new sumaVentas({
+    RTN,
+    nombreEmpresa,
+    sumaAMDC,
+    sumaSar,
+    anio,
+    usuario,
+  });
+
+  try {
+    await newSumaVenta.save();
+    res.json({ message: "Suma de ventas brutas guardada" });
+  } catch (error) {
+    res.status(500).json({ message: "Error al guardar la suma de ventas brutas" });
+  }
+};
+
+
+
 
 export default ApiCtrl;
