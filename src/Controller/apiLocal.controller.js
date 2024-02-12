@@ -68,53 +68,27 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
 };
 
 // Consulta por Ventas Brutas
-ApiLocalCtrl.ventasBrutasl = async (req, res) => {
-  const apiUrl = "https://api.amdc.hn:9091/api/ventaBruta"; 
-  const { Rtn, PeriodoDesde, PeriodoHasta } = req.body;
-
+ApiLocalCtrl.ventasBrutasl  = async (req, res) => {
   try {
-    console.log("Rtn: ", Rtn, PeriodoDesde, PeriodoHasta);
-    const response = await axios.post(
-      apiUrl,
-      { Rtn, PeriodoDesde, PeriodoHasta },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const apiUrl = "https://api.amdc.hn:9091/api/ventaBruta";
+    const { Rtn, PeriodoDesde, PeriodoHasta } = req.body;
 
-    console.log("Esto viene: ", response.data);
-    res.status(200).json(response.data);
-  } catch (error) {
-    // Prepara un objeto de error personalizado con la información específica
-    let customError = {
-      data: null,
-      isSuccess: false,
-      message: "Error desconocido",
-    };
-
-    // Verifica si el error es una instancia de AxiosError
-    if (error instanceof axios.AxiosError) {
-      // Accede a las propiedades específicas del error de Axios
-      const axiosError = error;
-
-      // Accede a la respuesta (si está disponible)
-      const responseData = axiosError.response?.data;
-
-      if (responseData) {
-        customError = {
-          ...customError,
-          data: responseData.data,
-          isSuccess: responseData.isSuccess,
-          message: responseData.message,
-        };
-      }
+    // Verificar si los datos requeridos están presentes
+    if (!Rtn || !PeriodoDesde || !PeriodoHasta) {
+      return res.status(400).json({ error: 'Se requieren Rtn, PeriodoDesde y PeriodoHasta' });
     }
-    console.log(customError);
 
-    res.status(500).json( customError);
+    // Realizar la solicitud a la API
+    const response = await axios.post(apiUrl, { Rtn, PeriodoDesde, PeriodoHasta });
+
+    // Si la solicitud fue exitosa, devolver los datos
+    return res.json(response.data);
+  } catch (error) {
+    // Si ocurre algún error, devolver un mensaje de error
+    console.error('Error al consumir la API:', error.message);
+    return res.status(500).json({ error: 'Error al consumir la API' });
   }
 };
+
 
 export default ApiLocalCtrl;

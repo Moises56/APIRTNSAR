@@ -2,6 +2,7 @@
 const ApiCtrl = {};
 import sumaVentas from "../Model/SumaVVB.js";
 import User from "../Model/User.js";
+import AMDCDATA from "../Model/AmdcDatos.js";
 
 import axios from "axios";
 import { response } from "express";
@@ -56,9 +57,9 @@ ApiCtrl.consultaRTN = async (req, res) => {
         };
       }
     }
-    console.log(customError);
+    // console.log(customError);
 
-    res.status(500).json(customError);
+    res.json({customError});
   }
 };
 
@@ -114,7 +115,7 @@ ApiCtrl.ventasBrutas = async (req, res) => {
     }
     console.log(customError);
 
-    res.status(500).json(customError);
+    res.json({customError});
   }
 };
 
@@ -184,6 +185,41 @@ ApiCtrl.getVentasBrutasById = async (req, res) => {
     res.status(500).json({ success: false, message: "Error al obtener las sumas de ventas brutas por usuario", error: error.message });
   }
 };
+
+//ÒBTENER TODOS LOS DATOS DE AMDCDATOS PASNDO EL RTN y el ANIO COMO PARAMETROS
+ApiCtrl.getAmdcDatos = async (req, res) => {
+  const { RTN, ANIO } = req.body;
+  console.log(RTN, ANIO);
+
+  try {
+    // Verificar si el RTN tiene el formato correcto
+    if (RTN.length < 14) {
+      return res.status(400).json({
+        isSuccess: false,
+        message: `El RTN no cumple con el formato de 14 caracteres: ${RTN}`,
+      });
+    }
+
+    // Buscar los datos en la base de datos
+    const amdcDatos = await AMDCDATA.find({ RTN, ANIO });
+
+    // Verificar si hay datos para el año ingresado
+    if (amdcDatos.length === 0) {
+      return res.status(404).json({
+        isSuccess: false,
+        message: `No hay datos para el año ingresado: ${ANIO}`,
+      });
+    }
+
+    // Si hay datos, enviarlos como un array
+    res.json(amdcDatos[0]);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener los datos de AMDCDATOS" });
+  }
+};
+
+
+
 
 
 

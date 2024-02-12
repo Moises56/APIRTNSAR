@@ -6,7 +6,7 @@ import ApiLocalCtrl from '../Controller/apiLocal.controller.js';
 import { verifyToken  } from "../Middlewares/authJwt.js";
 
 
-router.post('/apirtnl', verifyToken, ApiLocalCtrl.consultaRTNl);
-router.post('/ventaBrutal', verifyToken, ApiLocalCtrl.ventasBrutasl);
+router.post('/apirtnl', ApiLocalCtrl.consultaRTNl);
+router.post('/ventaBrutal', ApiLocalCtrl.ventasBrutasl);
 
 export default router;

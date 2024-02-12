@@ -22,7 +22,7 @@ import authRoutes from "./Routes/auth.routes.js";
 const app = express();
 
 // Settings
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3001);
 app.set("json spaces", 4);
 
 
