@@ -5,7 +5,7 @@ export const MONGODB_URI =
     // process.env.MONGODB_URI || "mongodb://localhost/sarapi";
     process.env.MONGODB_URI || "mongodb+srv://uga:uga456@cluster0.rgl68zc.mongodb.net/uga?retryWrites=true&w=majority";
 
-export const PORT = process.env.PORT || 3001;
+export const PORT = process.env.PORT || 3000;
 export const SECRET = "yoursecretkey";
 
 export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@localhost";
