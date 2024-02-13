@@ -14,4 +14,4 @@ var parametrosSchema = new mongoose.Schema(
     }
     );
 
-export default mongoose.model("Parametros", parametrosSchema);
+export default mongoose.model("Parametros", parametrosSchema);0
