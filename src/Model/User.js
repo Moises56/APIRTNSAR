@@ -15,6 +15,14 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    identidad: {
+      type: String,
+      required: true,
+    },
+    gerencia: {
+      type: String,
+      required: true,
+    },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

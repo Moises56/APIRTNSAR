@@ -5,13 +5,15 @@ import { SECRET } from "../config.js";
 
 export const signupHandler = async (req, res) => {
   try {
-    const { username, email, password, roles } = req.body;
+    const { username, email, password, identidad, gerencia, roles } = req.body;
 
     // Creating a new User Object
     const newUser = new User({
       username,
       email,
       password,
+      identidad,
+      gerencia,
       roles
     });
 
@@ -67,6 +69,8 @@ export const signinHandler = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
+      identidad: userFound.identidad,
+      gerencia: userFound.gerencia,
       roles: userFound.roles.map((role) => "ROLE_" + role.name.toUpperCase()),
       accessToken: token,
     });

@@ -12,6 +12,8 @@ export const createUser = async (req, res) => {
       username,
       email,
       password,
+      identidad,
+      gerencia,
       roles: rolesFound.map((role) => role._id),
     });
 
@@ -25,7 +27,10 @@ export const createUser = async (req, res) => {
       _id: savedUser._id,
       username: savedUser.username,
       email: savedUser.email,
+      identidad: savedUser.identidad,
+      gerencia: savedUser.gerencia,
       roles: savedUser.roles,
+
     });
   } catch (error) {
     console.error(error);
@@ -59,7 +64,7 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { idUser } = req.params;
-    const { username, email, password, roles } = req.body;
+    const { username, email, password, identidad, gerencia, roles } = req.body;
 
     const rolesFound = await Role.find({ name: { $in: roles } });
 
@@ -68,6 +73,8 @@ export const updateUser = async (req, res) => {
     const updated = await User.findByIdAndUpdate(idUser, {
         username,
         email,
+        identidad,
+        gerencia,
         password: await User.encryptPassword(password),
         roles: rolesFound.map((role) => role._id),
       }, { new: true });
