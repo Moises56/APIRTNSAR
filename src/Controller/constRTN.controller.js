@@ -165,7 +165,7 @@ ApiCtrl.getVentasBrutas = async (req, res) => {
     const sumasVentas = await sumaVentas.find();
     res.json(sumasVentas);
   } catch (error) {
-    res.status(500).json({ message: "Error al obtener las sumas de ventas brutas" });
+    res.json({ message: "Error al obtener las sumas de ventas brutas" });
   }
 };
 
@@ -179,7 +179,7 @@ ApiCtrl.getVentasBrutasById = async (req, res) => {
     // Verificar si el usuario existe en la base de datos del modelo User
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ success: false, message: "El usuario no existe" });
+      return res.json({ success: false, message: "El usuario no existe" });
     }
 
     // Obtener las sumas de ventas brutas para el usuario específico
@@ -188,7 +188,7 @@ ApiCtrl.getVentasBrutasById = async (req, res) => {
     res.json(sumasVentas);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Error al obtener las sumas de ventas brutas por usuario", error: error.message });
+    res.json({ success: false, message: "Error al obtener las sumas de ventas brutas por usuario", error: error.message });
   }
 };
 
@@ -200,7 +200,7 @@ ApiCtrl.getAmdcDatos = async (req, res) => {
   try {
     // Verificar si el RTN tiene el formato correcto
     if (RTN.length < 14) {
-      return res.status(400).json({
+      return res.json({
         isSuccess: false,
         message: `El RTN no cumple con el formato de 14 caracteres: ${RTN}`,
       });
@@ -211,7 +211,7 @@ ApiCtrl.getAmdcDatos = async (req, res) => {
 
     // Verificar si hay datos para el año ingresado
     if (amdcDatos.length === 0) {
-      return res.status(404).json({
+      return res.json({
         isSuccess: false,
         message: `No hay datos para el año ingresado: ${ANIO}`,
       });
@@ -220,7 +220,7 @@ ApiCtrl.getAmdcDatos = async (req, res) => {
     // Si hay datos, enviarlos como un array
     res.json(amdcDatos[0]);
   } catch (error) {
-    res.status(500).json({ message: "Error al obtener los datos de AMDCDATOS" });
+    res.json({ message: "Error al obtener los datos de AMDCDATOS" });
   }
 };
 
