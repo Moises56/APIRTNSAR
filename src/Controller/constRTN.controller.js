@@ -134,7 +134,7 @@ ApiCtrl.saveVentasBrutas = async (req, res) => {
     // Verificar si el usuario existe en la base de datos del modelo User
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(400).json({ success: false, message: "El usuario no existe" });
+      return res.json({ success: false, message: "El usuario no existe" });
     } else {
       console.log('Usuario encontrado en la base de datos');
     }
