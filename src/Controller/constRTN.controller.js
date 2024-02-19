@@ -40,7 +40,7 @@ ApiCtrl.consultaRTN = async (req, res) => {
     let customError = {
       data: null,
       isSuccess: false,
-      message: "Error desconocido",
+      message: "Error en los servicios del SAR. Por favor, vuelve a intentarlo.",
     };
 
     // Verifica si el error es una instancia de AxiosError
@@ -99,8 +99,9 @@ ApiCtrl.ventasBrutas = async (req, res) => {
     let customError = {
       data: null,
       isSuccess: false,
-      message: "Error desconocido",
+      message: "Error en los servicios del SAR. Por favor, vuelve a intentarlo.",
     };
+    
 
     // Verifica si el error es una instancia de AxiosError
     if (error instanceof axios.AxiosError) {
