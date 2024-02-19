@@ -40,7 +40,7 @@ ApiCtrl.consultaRTN = async (req, res) => {
     let customError = {
       data: null,
       isSuccess: false,
-      message: "Error en los servicios del SAR. Por favor, vuelve a intentarlo.",
+      message: "Lo sentimos, se produjo un error al procesar tu solicitud en los servicios del SAR. Por favor, inténtalo de nuevo.",
     };
 
     // Verifica si el error es una instancia de AxiosError
@@ -99,7 +99,7 @@ ApiCtrl.ventasBrutas = async (req, res) => {
     let customError = {
       data: null,
       isSuccess: false,
-      message: "Error en los servicios del SAR. Por favor, vuelve a intentarlo.",
+      message: "Lo sentimos, se produjo un error al procesar tu solicitud en los servicios del SAR. Por favor, inténtalo de nuevo.",
     };
     
 
