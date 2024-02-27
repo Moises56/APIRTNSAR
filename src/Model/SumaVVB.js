@@ -28,6 +28,12 @@ var sumaVentaSchema = new mongoose.Schema(
       trim: true,
       maxlength: [100, "Suma Sar cannot be greater than 100 characters"],
     },
+    diferencia: {
+      type: String,
+      required: [true, "The diferencia is required"],
+      trim: true,
+      maxlength: [100, "Diferencia cannot be greater than 100 characters"],
+    },
     anio: {
       type: String,
       required: [true, "The anio is required"],

@@ -129,7 +129,7 @@ ApiCtrl.ventasBrutas = async (req, res) => {
 // guarda el total de ventas brutas 
 // {id: 1, RTN: rtn, nombreEmpresa: empresa sumaAMDC: amdc, sumaSar: sar, anio: "2019", usuario: "admin"}
 ApiCtrl.saveVentasBrutas = async (req, res) => {
-  const { RTN, nombreEmpresa, sumaAMDC, sumaSar, anio, usuario, userId } = req.body;
+  const { RTN, nombreEmpresa, sumaAMDC, sumaSar, diferencia, anio, usuario, userId } = req.body;
 
   try {
     // Verificar si el usuario existe en la base de datos del modelo User
@@ -140,13 +140,13 @@ ApiCtrl.saveVentasBrutas = async (req, res) => {
       console.log('Usuario encontrado en la base de datos');
     }
 
-
     const newSumaVenta = new sumaVentas({
       userId,
       RTN,
       nombreEmpresa,
       sumaAMDC,
       sumaSar,
+      diferencia,
       anio,
       usuario,
     });
@@ -160,21 +160,36 @@ ApiCtrl.saveVentasBrutas = async (req, res) => {
 };
 
 
-// obtener todas las sumas de ventas brutas 
+// obtener todas las sumas de ventas brutas con paginacion mostrar 10 registros por pagina
 ApiCtrl.getVentasBrutas = async (req, res) => {
-  try {
-    const sumasVentas = await sumaVentas.find();
-    res.json(sumasVentas);
-  } catch (error) {
-    res.json({ message: "Error al obtener las sumas de ventas brutas" });
-  }
-};
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 10;
 
+  try {
+    const totalItems = await sumaVentas.countDocuments();
+    const sumasVentas = await sumaVentas.find()
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .sort({ createdAt: -1 })
+      .lean();
+
+    res.json({
+      sumasVentas,
+      totalPages: Math.ceil(totalItems / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({ success: false, message: "Error al obtener las sumas de ventas brutas", error: error.message });
+  }
+  
+};
 
 // obtener una suma de ventas brutas por id de usuario
 ApiCtrl.getVentasBrutasById = async (req, res) => {
   const userId = req.params.idUser;
-  console.log(userId)
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 10;
 
   try {
     // Verificar si el usuario existe en la base de datos del modelo User
@@ -184,9 +199,19 @@ ApiCtrl.getVentasBrutasById = async (req, res) => {
     }
 
     // Obtener las sumas de ventas brutas para el usuario específico
-    const sumasVentas = await sumaVentas.find({ userId });
+    const totalItems = await sumaVentas.countDocuments({ userId });
+    const sumasVentas = await sumaVentas.find({ userId })
+    .limit(limit)
+    .skip((page - 1) * limit)
+    .sort({ createdAt: -1 })
+    .lean();
 
-    res.json(sumasVentas);
+    res.json(
+      {
+        sumasVentas,
+        totalPages: Math.ceil(totalItems / limit),
+        currentPage: page,
+      });
   } catch (error) {
     console.error(error);
     res.json({ success: false, message: "Error al obtener las sumas de ventas brutas por usuario", error: error.message });
