@@ -3,6 +3,7 @@ const ApiCtrl = {};
 import sumaVentas from "../Model/SumaVVB.js";
 import User from "../Model/User.js";
 import AMDCDATA from "../Model/AmdcDatos.js";
+import AMDCDATAc from "../Model/DatosAmdcCs.js";
 
 import axios from "axios";
 import { response } from "express";
@@ -250,6 +251,42 @@ ApiCtrl.getAmdcDatos = async (req, res) => {
   }
 };
 
+
+//* Get DATOSaMDCS
+
+ApiCtrl.getAmdcDatoscS = async (req, res) => {
+  const { RTN, ANIO } = req.body;
+  console.log(RTN, ANIO);
+
+  try {
+    // Verificar si el RTN tiene el formato correcto
+    if (RTN.length < 14) {
+      return res.json({
+        isSuccess: false,
+        message: `El RTN no cumple con el formato de 14 caracteres: ${RTN}`,
+      });
+    }
+
+    // Buscar los datos en la base de datos
+    const amdcDatos = await AMDCDATAc.find({ RTN, ANIO })
+    //ordenar por el estado si es 0 
+    .sort({ ESTATUS: 1, FECHA: -1})
+    .lean();
+
+    // Verificar si hay datos para el año ingresado
+    if (amdcDatos.length === 0) {
+      return res.json({
+        isSuccess: false,
+        message: `No hay datos para el año ingresado: ${ANIO}`,
+      });
+    }
+
+    // Si hay datos, enviarlos como un array
+    res.json(amdcDatos);
+  } catch (error) {
+    res.json({ message: "Error al obtener los datos de AMDCDATOS" });
+  }
+};
 
 
 

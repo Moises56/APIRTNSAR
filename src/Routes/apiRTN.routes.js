@@ -13,5 +13,7 @@ router.post('/getSumaVVB/:idUser', apiController.getVentasBrutasById);
 // obtener los datos de la tabla amdc_datos  pasandole el RTN
 router.post('/getAmdcDatos', apiController.getAmdcDatos);
 
+router.post('/getAmdcDatoscS', apiController.getAmdcDatoscS);
+
 
 export default router;

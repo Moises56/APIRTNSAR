@@ -16,6 +16,9 @@ import apiRTNl from "./Routes/apiLocal.routes.js";
 import usersRoutes from "./Routes/user.routes.js";
 import authRoutes from "./Routes/auth.routes.js";
 
+//email
+import EmailCtrl from "./Routes/email.routes.js";
+
 
 
 // Initialize express
@@ -40,6 +43,8 @@ app.use("/api", apiRTNl);
 
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
+
+app.use("/api/email", EmailCtrl);
 
 
 

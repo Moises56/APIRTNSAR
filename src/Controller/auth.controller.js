@@ -7,6 +7,8 @@ export const signupHandler = async (req, res) => {
   try {
     const { username, email, password, identidad, gerencia, roles } = req.body;
 
+    console.log('req.body: ', req.body);
+
     // Creating a new User Object
     const newUser = new User({
       username,
@@ -16,6 +18,7 @@ export const signupHandler = async (req, res) => {
       gerencia,
       roles
     });
+    console.log('newUser: ', newUser);
 
     // checking for roles
     if (roles) {

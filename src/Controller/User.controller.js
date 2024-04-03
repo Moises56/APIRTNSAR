@@ -3,7 +3,7 @@ import Role from "../Model/Role.js";
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, password, roles } = req.body;
+    const { username, email, password, identidad, gerencia, roles } = req.body;
 
     const rolesFound = await Role.find({ name: { $in: roles } });
 
@@ -47,13 +47,18 @@ export const getUsers = async (req, res) => {
     console.error(error);
   }
 
-
 };
 
 export const getUser = async (req, res) => {
   try {
     const { idUser } = req.params;
     const user = await User.findById(idUser)
+    .populate("roles", { name: 1 });
+
+    //desencriptar el password
+    // user.password = await User.decryptPassword(user.password);
+    console.log(user);
+
     res.json(user);
   }
   catch (error) {
@@ -67,8 +72,6 @@ export const updateUser = async (req, res) => {
     const { username, email, password, identidad, gerencia, roles } = req.body;
 
     const rolesFound = await Role.find({ name: { $in: roles } });
-
-
     // encriptar la contraseña y actualizar el usuario 
     const updated = await User.findByIdAndUpdate(idUser, {
         username,
@@ -84,7 +87,7 @@ export const updateUser = async (req, res) => {
   }
   catch (error) {
     console.error(error);
-  }
+  } 
 }
 
 export const deleteUser = async (req, res) => {
