@@ -4,6 +4,8 @@ import sumaVentas from "../Model/SumaVVB.js";
 import User from "../Model/User.js";
 import AMDCDATA from "../Model/AmdcDatos.js";
 import AMDCDATAc from "../Model/DatosAmdcCs.js";
+import DATAAMDCON from "../Model/DataAmdcOn.js";
+
 
 import axios from "axios";
 import { response } from "express";
@@ -288,8 +290,65 @@ ApiCtrl.getAmdcDatoscS = async (req, res) => {
   }
 };
 
+//Obtener todos los datos de AMDcDATOS con paginacion mostrar 20 registros por pagina
+ApiCtrl.getAllAmdcDatos = async (req, res) => {
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 20;
 
+  try {
+    const totalItems = await DATAAMDCON.countDocuments();
+    const amdcDatos = await DATAAMDCON.find()
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .sort({ createdAt: -1 })
+      .lean();
 
+    res.json({
+      amdcDatos,
+      totalPages: Math.ceil(totalItems / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({ success: false, message: "Error al obtener los datos de AMDCDATOS", error: error.message });
+  }
+};
+
+// filtrar por DNI_RTN, ICS, CONTRIBUYENTE en el modelo de DATOSAMDCON
+ApiCtrl.getAmdcDatosByRTN = async (req, res) => {
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 20;
+  const { busqueda } = req.body;
+
+  try {
+    const query = {
+      $or: [
+        { DNI_RTN: { $regex: busqueda, $options: 'i' } },
+        { ICS: { $regex: busqueda, $options: 'i' } },
+        { CONTRIBUYENTE: { $regex: busqueda, $options: 'i' } },
+        { NOMBRE_COMERCIAL: { $regex: busqueda, $options: 'i' } },
+      ]
+    };
+
+    const [contribuyentes, totalItems] = await Promise.all([
+      DATAAMDCON.find(query)
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .sort({ ANIO: -1})
+        .lean(),
+      DATAAMDCON.countDocuments(query)
+    ]);
+
+    res.json({
+      contribuyentes,
+      totalPages2: Math.ceil(totalItems / limit),
+      currentPage2: page,
+    });
+  } catch (error) {
+    console.error(error);
+    res.json({ success: false, message: "Error al obtener los datos de AMDCDATOS", error: error.message });
+  }
+};
 
 
 export default ApiCtrl;

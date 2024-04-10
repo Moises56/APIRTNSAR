@@ -14,6 +14,11 @@ router.post('/getSumaVVB/:idUser', apiController.getVentasBrutasById);
 router.post('/getAmdcDatos', apiController.getAmdcDatos);
 
 router.post('/getAmdcDatoscS', apiController.getAmdcDatoscS);
+router.post('/getAllAmdcDatos', apiController.getAllAmdcDatos);
+router.post('/getDataAmdc', apiController.getAmdcDatosByRTN);
+
+
+
 
 
 export default router;

@@ -6,7 +6,7 @@ import { response } from "express";
 
 //Consulta por RTN
 ApiLocalCtrl.consultaRTNl = async (req, res) => {
-  const apiUrl = "https://api.amdc.hn:9091/api/apirtn";
+  const apiUrl = "https://api.amdc.hn/api/apirtn";
   const username = "INT-AMDC-SW-API";
   const password = "X&#rjw1Z5S&2";
   const { rtn } = req.body;
@@ -70,7 +70,7 @@ ApiLocalCtrl.consultaRTNl = async (req, res) => {
 // Consulta por Ventas Brutas
 ApiLocalCtrl.ventasBrutasl  = async (req, res) => {
   try {
-    const apiUrl = "https://api.amdc.hn:9091/api/ventaBruta";
+    const apiUrl = "https://api.amdc.hn/api/ventaBruta";
     const { Rtn, PeriodoDesde, PeriodoHasta } = req.body;
 
     // Verificar si los datos requeridos están presentes
